@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;Swift&quot;,&quot;Java&quot;,&quot;JavaScript&quot;]">
+  <body class="index" data-languages="[&quot;Swift&quot;,&quot;Java&quot;,&quot;Javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -213,7 +213,7 @@
         <div class="lang-selector">
               <a href="#" data-language-name="Swift">Swift</a>
               <a href="#" data-language-name="Java">Java</a>
-              <a href="#" data-language-name="JavaScript">JavaScript</a>
+              <a href="#" data-language-name="Javascript">Javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -235,7 +235,30 @@
               </ul>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="authentication">Authentication</a>
+            <a href="#data-model" class="toc-h1 toc-link" data-title="data-model">Data Model</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#person" class="toc-h2 toc-link" data-title="person">Person</a>
+                  </li>
+                  <li>
+                    <a href="#student" class="toc-h2 toc-link" data-title="student">Student</a>
+                  </li>
+                  <li>
+                    <a href="#mentor" class="toc-h2 toc-link" data-title="mentor">Mentor</a>
+                  </li>
+                  <li>
+                    <a href="#parent" class="toc-h2 toc-link" data-title="parent">Parent</a>
+                  </li>
+                  <li>
+                    <a href="#project" class="toc-h2 toc-link" data-title="project">Project</a>
+                  </li>
+                  <li>
+                    <a href="#debrief" class="toc-h2 toc-link" data-title="debrief">Debrief</a>
+                  </li>
+                  <li>
+                    <a href="#others" class="toc-h2 toc-link" data-title="others">Others</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#kittens" class="toc-h1 toc-link" data-title="kittens">Kittens</a>
@@ -280,36 +303,260 @@
 <p><code>npm start</code> </p>
 
 <p>to run the server, which will be available at localhost:1337.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='data-model'>Data Model</h1>
+<p>This section contains the data model for Student, Mentor, Parent, Project, Debrief.</p>
+<h2 id='person'>Person</h2>
+<p>The base class for Student, Parent and Mentor. </p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<table><thead>
+<tr>
+<th>Identifier</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>String</td>
+<td>The username for the specific user</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The real name for the specific user</td>
+</tr>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>The object id stored in database</td>
+</tr>
+<tr>
+<td>userGroup</td>
+<td>String</td>
+<td>Either a &quot;mentor&quot; or a &quot;parent&quot;</td>
+</tr>
+<tr>
+<td>profilePhoto</td>
+<td>Parse File</td>
+<td>The profile picture for the specific user</td>
+</tr>
+<tr>
+<td>parseObject</td>
+<td>Parse Object</td>
+<td>The Parse Object associated with the specific user</td>
+</tr>
+</tbody></table>
+<h2 id='student'>Student</h2><pre class="highlight swift tab-swift"><code><span class="c1">// to initialized a student object</span>
+<span class="k">let</span> <span class="nv">studentObject</span><span class="p">:</span> <span class="kt">PFObject</span> <span class="o">=</span> <span class="o">...</span> <span class="c1">// retrieve student from database</span>
+<span class="k">let</span> <span class="nv">student</span> <span class="o">=</span> <span class="kt">Student</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">studentObject</span><span class="p">)</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="c1">// to retrieve total class of a program</span>
+<span class="kd">func</span> <span class="nf">getTotalClass</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">program</span> <span class="o">==</span> <span class="s">"STEM Club"</span> <span class="p">?</span> <span class="mi">52</span> <span class="p">:</span> <span class="mi">12</span>
+<span class="p">}</span>
 </code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>The derived class from Person, which contains all information about a student.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<table><thead>
+<tr>
+<th>Identifier</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>program</td>
+<td>String</td>
+<td>The program in which the student participates</td>
+</tr>
+<tr>
+<td>level</td>
+<td>String</td>
+<td>The level of the program at which the student currently is</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>String</td>
+<td>The gender of the student</td>
+</tr>
+<tr>
+<td>projectsFinished</td>
+<td>Integer</td>
+<td>Number of projects completed by the specific student</td>
+</tr>
+<tr>
+<td>classesFinished</td>
+<td>Integer</td>
+<td>Number of classes completed by the specific student (within one program)</td>
+</tr>
+<tr>
+<td>lastAttendance</td>
+<td>Date</td>
+<td>The last date which the student attends</td>
+</tr>
+<tr>
+<td>projects</td>
+<td>Array&lt;<a href="#project">Project</a>&gt;</td>
+<td>An array of projects completed by the specific student</td>
+</tr>
+<tr>
+<td>currentProject</td>
+<td><a href="#project">Project</a></td>
+<td>The project that the student is working on</td>
+</tr>
+<tr>
+<td>day</td>
+<td><a href="#day">Day</a></td>
+<td>The come-in date and time for the specific student</td>
+</tr>
+</tbody></table>
+<h2 id='mentor'>Mentor</h2>
+<p>The derived class from Person, which contains all information about a mentor.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<table><thead>
+<tr>
+<th>Identifier</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mentorInfo</td>
+<td>String</td>
+<td>The information about the specific mentor</td>
+</tr>
+<tr>
+<td>availableDates</td>
+<td>Array&lt;<a href="#day">Day</a>&gt;</td>
+<td>The available date and time for the specific mentor</td>
+</tr>
+</tbody></table>
+<h2 id='parent'>Parent</h2>
+<p>The derived class from Person, which contains all information about a parent.</p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<table><thead>
+<tr>
+<th>Identifier</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>The phone number of the specific parent</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>The email of the specific parent</td>
+</tr>
+<tr>
+<td>students</td>
+<td>Array&lt;<a href="#student">Student</a>&gt;</td>
+<td>An array of students who belong to the specific parent</td>
+</tr>
+</tbody></table>
+<h2 id='project'>Project</h2><pre class="highlight swift tab-swift"><code><span class="c1">// to initialized a project object</span>
+<span class="k">let</span> <span class="nv">projectObject</span><span class="p">:</span> <span class="kt">PFObject</span> <span class="o">=</span> <span class="o">...</span> <span class="c1">// retrieve project from database</span>
+<span class="k">let</span> <span class="nv">project</span> <span class="o">=</span> <span class="kt">Project</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">projectObject</span><span class="p">)</span>
+</code></pre>
+<p>This class contains all information about a student&#39;s project.</p>
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+<table><thead>
+<tr>
+<th>Identifier</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>projectName</td>
+<td>String</td>
+<td>The name of the project</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>The description of the project</td>
+</tr>
+<tr>
+<td>language</td>
+<td>String</td>
+<td>The programming language of the project</td>
+</tr>
+<tr>
+<td>progress</td>
+<td>String</td>
+<td>Student&#39;s progress on this project</td>
+</tr>
+<tr>
+<td>student</td>
+<td><a href="#student">Student</a></td>
+<td>The student who is working on this project</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">The progress of a project must be set strictly(case sensitive) to "In Progress" or "Finished" or "Presented".</aside>
+<h2 id='debrief'>Debrief</h2>
+<p>This class contains all information about a student&#39;s debrief.</p>
+
+<table><thead>
+<tr>
+<th>Identifier</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mentorName</td>
+<td>String</td>
+<td>The name of the mentor</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>The debrief content</td>
+</tr>
+<tr>
+<td>mentor</td>
+<td><a href="#mentor">Mentor</a></td>
+<td>The mentor who was working with the student</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Date</td>
+<td>The date which the debrief is created</td>
+</tr>
+</tbody></table>
+<h2 id='others'>Others</h2><h3 id='day'>Day</h3><pre class="highlight swift tab-swift"><code><span class="c1">// to initialized a day object</span>
+<span class="k">let</span> <span class="nv">day</span> <span class="o">=</span> <span class="kt">Day</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="s">"Monday 0900 0400"</span><span class="p">)</span>
+
+<span class="c1">// to convert day into String:</span>
+<span class="n">day</span><span class="o">.</span><span class="nf">toTimeString</span><span class="p">()</span> <span class="c1">// "Monday 0900 0400"</span>
+</code></pre>
+<p>This is a structure which contains a weekday and a time range for displaying mentor availability and student attendance.</p>
+
+<table><thead>
+<tr>
+<th>Identifier</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>day</td>
+<td>String</td>
+<td>The weekday</td>
+</tr>
+<tr>
+<td>timeRange</td>
+<td>Tuple</td>
+<td>The time range in tuple format: <code>((beginHour, beginMinuet), (endHour, endMinuet))</code></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">This object will be stored as a String in the database, with the format of "Monday 0300 0800" or "Saturday 1100 0240", which mean "Monday 3 to 8 pm" and "Saturday 11am to 2:40pm" respectively.</aside>
 <h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
@@ -517,7 +764,7 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
           <div class="lang-selector">
                 <a href="#" data-language-name="Swift">Swift</a>
                 <a href="#" data-language-name="Java">Java</a>
-                <a href="#" data-language-name="JavaScript">JavaScript</a>
+                <a href="#" data-language-name="Javascript">Javascript</a>
           </div>
       </div>
     </div>
