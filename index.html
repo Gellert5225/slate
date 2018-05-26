@@ -233,6 +233,9 @@
                     <a href="#usage" class="toc-h2 toc-link" data-title="usage">Usage</a>
                   </li>
                   <li>
+                    <a href="#dashboard" class="toc-h2 toc-link" data-title="dashboard">Dashboard</a>
+                  </li>
+                  <li>
                     <a href="#documentation" class="toc-h2 toc-link" data-title="documentation">Documentation</a>
                   </li>
               </ul>
@@ -247,9 +250,6 @@
                     <a href="#naming-and-identifiers" class="toc-h2 toc-link" data-title="naming-and-identifiers">Naming and identifiers</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
           </li>
           <li>
             <a href="#data-model" class="toc-h1 toc-link" data-title="data-model">Data Model</a>
@@ -282,6 +282,17 @@
           </li>
           <li>
             <a href="#restful-routes" class="toc-h1 toc-link" data-title="restful-routes">RESTful Routes</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#login" class="toc-h2 toc-link" data-title="login">Login</a>
+                  </li>
+                  <li>
+                    <a href="#register" class="toc-h2 toc-link" data-title="register">Register</a>
+                  </li>
+                  <li>
+                    <a href="#logout" class="toc-h2 toc-link" data-title="logout">Logout</a>
+                  </li>
+              </ul>
           </li>
       </div>
         <ul class="toc-footer">
@@ -319,6 +330,12 @@
 <p><code>npm start</code> </p>
 
 <p>Donezo! Go visit the webpage at localhost:1337</p>
+<h2 id='dashboard'>Dashboard</h2>
+<p>We also provide a visual tool for viewing our database. To run the dashboard, go to <code>dashboard</code> directory and run</p>
+
+<p><code>npm start</code></p>
+
+<p>and then you can go to localhost:4040 to view or change data in a more beautiful way.</p>
 <h2 id='documentation'>Documentation</h2>
 <p>The documentation is inside the <code>Docs/source/index.html.md</code> file. You can refer to <a href="https://github.com/lord/slate/wiki/Markdown-Syntax">this</a> article about Markdown syntax.</p>
 <h1 id='style-guide'>Style Guide</h1>
@@ -333,9 +350,9 @@
 <span class="k">let</span> <span class="nv">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">// do sth.</span>
+    <span class="c1">// do sth.</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="c1">// do sth else.</span>
+    <span class="c1">// do sth else.</span>
 <span class="p">}</span>
 
 <span class="c1">// wrong</span>
@@ -382,64 +399,6 @@
 <p>Always initialize your variables! And only declare them right before you gonna use them.</p>
 
 <p>Note, Swift has optional types which allow NULL values, so it is okay to use optional instead of initializing.</p>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
 <h1 id='data-model'>Data Model</h1>
 <p>This section contains the data model for Student, Mentor, Parent, Project, Debrief.</p>
 <h2 id='person'>Person</h2>
@@ -703,6 +662,91 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 
 <aside class="notice">This object will be stored as a String in the database, with the format of "Monday 0300 0800" or "Saturday 1100 0240", which mean "Monday 3 to 8 pm" and "Saturday 11am to 2:40pm" respectively.</aside>
 <h1 id='cloud-codes'>Cloud Codes</h1><h1 id='restful-routes'>RESTful Routes</h1>
+<p>In this section you will find request and response params for all the routes. You will find information about each route&#39;s functionality, params for res and req, to help you communicate between server and front-end.</p>
+<h2 id='login'>Login</h2>
+<table><thead>
+<tr>
+<th>URL</th>
+<th>HTTP Verb</th>
+<th>Function</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/login</td>
+<td>POST</td>
+<td>Login the user</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>param</th>
+<th>HTTP Message</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>request</td>
+<td>Username for the user</td>
+</tr>
+<tr>
+<td>password</td>
+<td>request</td>
+<td>Password for the user</td>
+</tr>
+<tr>
+<td>back</td>
+<td>response</td>
+<td>Redirect back to previous page</td>
+</tr>
+</tbody></table>
+<h2 id='register'>Register</h2>
+<table><thead>
+<tr>
+<th>URL</th>
+<th>HTTP Verb</th>
+<th>Function</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/register</td>
+<td>POST</td>
+<td>Register a new user</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>param</th>
+<th>HTTP Message</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>request</td>
+<td>Username for the user</td>
+</tr>
+<tr>
+<td>password</td>
+<td>request</td>
+<td>Password for the user</td>
+</tr>
+<tr>
+<td>email</td>
+<td>request</td>
+<td>Email for the user</td>
+</tr>
+<tr>
+<td>back</td>
+<td>response</td>
+<td>Redirect back to previous page</td>
+</tr>
+</tbody></table>
+<h2 id='logout'>Logout</h2>
+<p>Logout function will be handled on server side.</p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
